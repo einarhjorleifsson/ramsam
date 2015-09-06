@@ -7,7 +7,7 @@
 read_sam(directory = "WBcod_2015_short", from_web = FALSE, user = "user3")
 }
 \arguments{
-\item{directory}{The directory name that contains the sam run.}
+\item{directory}{Name of the directory (assessment)}
 
 \item{from_web}{If FALSE (default) read from local directory. If TRUE read
 from www.stockassessment.org}

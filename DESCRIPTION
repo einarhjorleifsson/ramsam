@@ -1,13 +1,13 @@
 Package: ramsam
 Type: Package
-Title: A collection of various personal functions used in stock assessment
-Version: 0.0.3.9000
-Date: 2015-05-30
+Title: Reads data from www.stockassessment.org
+Version: 0.0.1.9000
+Date: 2015-0906
 Authors@R: person("Einar", "Hjorleifsson", email = "einarhjorleifsson@gmail.com",
   role = c("aut", "cre"))
-Description: Miscalaneous functions, ..
+Description: Get a full copy of an assessment directory and stores it on the local computer and reads the primary assessment results into R.
 Depends:
-  R (>= 3.1.0),
+  R (>= 3.1.0)
 Imports:
   dplyr,
   magrittr,

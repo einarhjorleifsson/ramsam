@@ -1,26 +1,25 @@
-# ------------------------------------------------------------------------------
-# various sam functions
-
 #' @title Get a sam directory from stockassessment.org
 #'
 #' @description The function copies the whole directory of an assessment run from
 #' stockassessment.org to a local directory
 #'
+#' @note This functions most likely works only in Linux
+#'
 #' @export
 #'
-#' @param assessment Name of the assessment
+#' @param directory Name of the directory (assessment)
 #' @param user Name of the user
 #'
 
-sam_get_directory <- function(assessment, user="user3") {
+get_sam <- function(directory, user="user3") {
 
-  path <- paste("https://www.stockassessment.org/datadisk/stockassessment/userdirs",user,assessment,sep="/")
-  cmd <- paste0("wget --recursive --reject=png,html --level=0 --no-parent ",path,"/")
+  path <- paste("https://www.stockassessment.org/datadisk/stockassessment/userdirs",user,directory,sep="/")
+  cmd  <- paste0("wget --recursive --reject=png,html --level=0 --no-parent ",path,"/")
   system(cmd)
 
   # cleanup
   Path <- "www.stockassessment.org/datadisk/stockassessment/userdirs"
-  Path <- paste(Path,user,assessment,sep="/")
+  Path <- paste(Path,user,directory,sep="/")
   cmd <- paste("mv", Path, ".")
   system(cmd)
   system("rm -r www.stockassessment.org")
@@ -35,7 +34,7 @@ sam_get_directory <- function(assessment, user="user3") {
 #'
 #' @export
 #'
-#' @param directory The directory name that contains the sam run.
+#' @param directory Name of the directory (assessment)
 #' @param from_web If FALSE (default) read from local directory. If TRUE read
 #' from www.stockassessment.org
 #' @param user User name if reading from www.stockassessment.org, guest users can use "user3" (default)
@@ -300,7 +299,8 @@ read_sam <- function(directory="WBcod_2015_short", from_web=FALSE, user="user3")
 
   rby <- dplyr::full_join(rby, oY, by=c("year"))
 
-  return(list(rbya=rbya,rby=rby))
+  return(list(rbya = dplyr::as_data_frame(rbya),
+              rby  = dplyr::as_data_frame(rby)))
 
 }
 
