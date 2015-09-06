@@ -294,8 +294,9 @@ read_sam <- function(directory="WBcod_2015_short", from_web=FALSE, user="user3")
   # ----------------------------------------------------------------------------
   # Calculate oY
   oY <- rbya %>%
+    filter(!is.na(oC) & !is.na(cW)) %>% # needs double testing
     dplyr::group_by(year) %>%
-    dplyr::summarize(oY = sum(cW * oC, na.rm=TRUE))
+    dplyr::summarize(oY = sum(cW * oC))
 
   rby <- dplyr::full_join(rby, oY, by=c("year"))
 
