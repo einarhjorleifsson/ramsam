@@ -37,9 +37,10 @@ get_sam <- function(directory, user="user3") {
 #' @param directory Name of the directory (assessment)
 #' @param from_web If FALSE (default) read from local directory. If TRUE read
 #' from www.stockassessment.org
+#' @param ass Character specifying name of the run
 #' @param user User name if reading from www.stockassessment.org, guest users can use "user3" (default)
 
-read_sam <- function(directory="WBcod_2015_short", from_web=FALSE, user="user3") {
+read_sam <- function(directory="WBcod_2015_short", from_web=FALSE, ass, user="user3") {
 
   # dummies
   cW <- oC <- fleet <- obs <- age <-
@@ -299,6 +300,9 @@ read_sam <- function(directory="WBcod_2015_short", from_web=FALSE, user="user3")
     dplyr::summarize(oY = sum(cW * oC))
 
   rby <- dplyr::full_join(rby, oY, by=c("year"))
+
+  rby$ass  <- ifelse(missing(ass),directory,ass)
+  rbya$ass <- ifelse(missing(ass),directory,ass)
 
   return(list(rbya = dplyr::as_data_frame(rbya),
               rby  = dplyr::as_data_frame(rby)))
