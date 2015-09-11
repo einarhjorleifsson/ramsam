@@ -44,6 +44,7 @@ devtools::install_github("einarhjorleifsson/ramsam")
 
 __Read only principle data from the web and return object to R__:
 
+
 ```r
 library(dplyr)
 ```
@@ -60,6 +61,9 @@ library(dplyr)
 ## 
 ##     intersect, setdiff, setequal, union
 ```
+
+=======
+
 
 ```r
 library(ramsam)
